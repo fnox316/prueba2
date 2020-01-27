@@ -26,7 +26,6 @@ pipeline {
     }    
     steps {
         withSonarQubeEnv('sonarqube') {
-            input message: 'Finished using the web site? (Click "Proceed" to continue)?'
             sh '/var/lib/jenkins/tools/hudson.plugins.sonar.SonarRunnerInstallation/SonarQubeScanner/bin/sonar-scanner'
         }        
         timeout(time: 10, unit: 'MINUTES') {
