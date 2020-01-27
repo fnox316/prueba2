@@ -20,13 +20,15 @@ pipeline {
                 sh './jenkins/scripts/test.sh'
             }
         }
-stage('Sonarqube') {
+        stage('Sonarqube') {
     environment {
         scannerHome = tool 'SonarQubeScanner'
-    }    steps {
+    }    
+    steps {
         withSonarQubeEnv('sonarqube') {
             sh "${scannerHome}/bin/sonar-scanner"
-        }        timeout(time: 10, unit: 'MINUTES') {
+        }        
+        timeout(time: 10, unit: 'MINUTES') {
             waitForQualityGate abortPipeline: true
         }
     }
