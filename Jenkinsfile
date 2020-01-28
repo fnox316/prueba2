@@ -20,11 +20,7 @@ pipeline {
                 sh './jenkins/scripts/test.sh'
             }
         }
-        stage('Sonarqube') {
-    environment {
-        scannerHome = tool 'SonarQubeScanner'
-    }    
- stage('Code Quality') {
+stage('Code Quality') {
                    steps {
                        script {
                           def scannerHome = tool 'SonarQubeScanner';
@@ -34,6 +30,12 @@ pipeline {
                                }
                            }
                         }
+
+
+        stage('Sonarqube') {
+    environment {
+        scannerHome = tool 'SonarQubeScanner'
+    }    
     steps {
         withSonarQubeEnv('sonarqube') {
            sh  '/var/lib/jenkins/tools/hudson.plugins.sonar.SonarRunnerInstallation/SonarQubeScanner/bin/sonar-scanner'
