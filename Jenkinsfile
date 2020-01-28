@@ -9,6 +9,18 @@ pipeline {
         CI = 'true'
 	HOME = '.'
     }
+
+stage('Code Quality22') {
+                   steps {
+                       script {
+                          def scannerHome = tool name: 'SonarQubeScanner', type: 'hudson.plugins.sonar.SonarRunnerInstallation';
+                          withSonarQubeEnv("sonarqube") {
+                          sh "${tool("SonarQubeScanner")}/bin/sonar-scanner -e -Dsonar.host.url='http://192.168.148.151:9090'"
+                                       }
+                               }
+                           }
+                        }
+
     stages {
         stage('Build') {
             steps {
