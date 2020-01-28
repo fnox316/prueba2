@@ -10,7 +10,9 @@ pipeline {
 	HOME = '.'
     }
 
-stage('Code Quality22') {
+    stages {
+
+stage('Code Quality') {
                    steps {
                        script {
                           def scannerHome = tool name: 'SonarQubeScanner', type: 'hudson.plugins.sonar.SonarRunnerInstallation';
@@ -21,7 +23,6 @@ stage('Code Quality22') {
                            }
                         }
 
-    stages {
         stage('Build') {
             steps {
                 sh 'npm install'
