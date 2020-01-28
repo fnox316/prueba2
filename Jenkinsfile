@@ -25,7 +25,7 @@ stage('Code Quality') {
                        script {
                           def scannerHome = tool name: 'SonarQubeScanner', type: 'hudson.plugins.sonar.SonarRunnerInstallation';
                           withSonarQubeEnv("sonarqube") {
-                          sh "${tool("SonarQubeScanner")}/bin/sonar-scanner -e -Dsonar.host.url=192.168.148.151 -Dsonar.login=bb8c5a7575e93b0bb5d40413f22e5cc57c2cff67"
+                          sh "${tool("SonarQubeScanner")}/bin/sonar-scanner -e -Dsonar.host.url='http://192.168.148.151:9090'"
                                        }
                                }
                            }
