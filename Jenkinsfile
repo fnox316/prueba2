@@ -7,8 +7,10 @@ pipeline{
                 label 'master'
             }
             steps {
-                sh('printenv | sort')
-                sh "/opt/sonar-scanner/bin/sonar-scanner -e '-Dsonar.host.url=http://192.168.148.151:9090'"
+		withSonarQubeEnv('sonarqube') {
+                  sh('printenv | sort')
+                  sh "/opt/sonar-scanner/bin/sonar-scanner -e '-Dsonar.host.url=http://192.168.148.151:9090'"
+                }
             }
         }
 
