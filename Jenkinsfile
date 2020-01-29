@@ -1,5 +1,9 @@
 pipeline{
 	agent none
+       triggers {
+    	pollSCM('* * * * *')
+       }
+
 	stages {
 
 	 stage('Sonarqube') {
