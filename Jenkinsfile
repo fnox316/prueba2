@@ -11,22 +11,11 @@ pipeline{
                   sh('printenv | sort')
                   sh "/opt/sonar-scanner/bin/sonar-scanner -e '-Dsonar.host.url=http://192.168.148.151:9090'"
                 }
-            }
-        }
 
-
-      stage('SonarqubeQualityGate') {
-           agent {
-                label 'master'
+                timeout(time: 10, unit: 'MINUTES') {
+                  waitForQualityGate abortPipeline: true
+                 }
             }
-            
-                timeout(time: 1, unit: 'HOURS') {
-                def qg = waitForQualityGate()
-                if (qg.status != 'OK') {
-                  error "Pipeline aborted due to quality gate failure: ${qg.status}"
-                }
-               }
- 
         }
       
       stage('Build'){
